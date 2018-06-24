@@ -12,14 +12,16 @@ import java.io.*;
 import java.util.*;
 
 public class TSP {
-	final static double coordinates[][] = new double[5][2];//the coordinates(x, y)
-	static int bestRoute[] = new int[5];
+	final static int N = 5;
+	final static int M = 24;
+	final static double coordinates[][] = new double[N][2];//the coordinates(x, y)
+	static int bestRoute[] = new int[N];
 	static double bestDistance;
-	static int routes[][] = new int[24][5];//(n-1)! versions
+	static int routes[][] = new int[M][N];//(n-1)! versions
 	static int routeNum = 0;
 	public static void main(String[] args) {
 		readFile("input_0.csv");
-		createRoute(0, new int[4], new boolean[5]);
+		createRoute(0, new int[N-1], new boolean[N]);
 		bestDistance = sumDistance(routes[0]);//initial value
 		checkBestRoute();
 		System.out.println(bestDistance);
@@ -96,7 +98,7 @@ public class TSP {
 	
 	/* 4. find best route*/
 	public static void checkBestRoute(){
-		 for(int i = 0; i<24; i++){ 
+		 for(int i = 0; i<M; i++){ 
 			 double distance = sumDistance(routes[i]);
 			 if(bestDistance>distance){//better than bestDistance
 				 bestDistance = distance;//update value
